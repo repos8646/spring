@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ch05.dao.User2Mapper">
+
+    <insert id="insertUser2">
+        insert into user2 values (#{uid}, #{name}, #{birth}, #{addr});
+    </insert>
+
+    <select id="selectUser2" resultType="com.ch05.dto.User2DTO">
+        select * from user2 where uid = #{uid};
+    </select>
+
+    <select id="selectUser2s" resultType="com.ch05.dto.User2DTO">
+        select * from user2;
+    </select>
+
+    <update id="updateUser2">
+        update user2 set
+            `name` = #{name},
+            `birth` = #{birth},
+            `addr` = #{addr}
+        where
+            `uid`= #{uid};
+    </update>
+
+    <delete id="deleteUser2">
+        delete from `user2` where `uid` = #{uid};
+    </delete>
+
+</mapper>
