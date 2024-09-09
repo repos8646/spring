@@ -1,4 +1,4 @@
-/*package com.ch06.controller;
+package com.ch06.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +51,4 @@ class User1ControllerTest {
     @Test
     void delete() {
     }
-}*/
+}
