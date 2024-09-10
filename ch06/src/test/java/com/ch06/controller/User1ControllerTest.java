@@ -31,17 +31,18 @@ class User1ControllerTest {
     @Test
     void register() throws Exception {
 
-        mockMvc.perform(
-                    post("/user1/register")
-                            .param("uid", "a101")
-                            .param("name", "테스트")
-                            .param("birth", "1990-01-01")
-                            .param("hp", "010-1234-1001")
-                            .param("age", "22")
-                    )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/user1/list"))
-                .andDo(print());
+        for(int i=1 ; i<1000 ; i++) {
+            mockMvc.perform(
+                            post("/user1/register")
+                                    .param("uid", "abc"+i)
+                                    .param("name", "테스트")
+                                    .param("birth", "1990-01-01")
+                                    .param("hp", "010-1234-1001")
+                                    .param("age", "22"))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(redirectedUrl("/user1/list"))
+                    .andDo(print());
+        }
     }
 
     @Test
@@ -49,6 +50,13 @@ class User1ControllerTest {
     }
 
     @Test
-    void delete() {
+    void delete() throws Exception {
+        for(int i=1 ; i<10000 ; i++) {
+            mockMvc.perform(get("/user1/delete")
+                            .param("uid", "abc"+i))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(redirectedUrl("/user1/list"))
+                    .andDo(print());
+        }
     }
 }
