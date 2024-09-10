@@ -17,7 +17,7 @@ public class File {
     private int fno;
 
     private String oName;
-    private String fName;
+    private String sName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ano")
