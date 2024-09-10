@@ -24,6 +24,7 @@ public class ShopRepositoryTest {
                 .name("김유신")
                 .hp("010-1234-1001")
                 .addr("부산시 동래구")
+                .age(23)
                 .build();
 
         customerRepository.save(customer);

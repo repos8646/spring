@@ -23,6 +23,7 @@ public class Customer {
     private String name;
     private String hp;
     private String addr;
+    private int age;
 
     @CreationTimestamp
     private LocalDateTime rdate;
