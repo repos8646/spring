@@ -4,6 +4,9 @@ import com.ch09.dto.User1DTO;
 import com.ch09.entity.User1;
 import com.ch09.service.User1Service;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 @Log4j2
@@ -22,7 +26,7 @@ public class User1Controller {
 
     @ResponseBody
     @GetMapping("/user1")
-    public List<User1DTO> list(){
+    public List<User1DTO> list(HttpServletResponse response) {
         List<User1DTO> users = user1Service.selectUser1s();
         return users;
     }
@@ -36,7 +40,7 @@ public class User1Controller {
 
     @ResponseBody
     @PostMapping("/user1")
-    public ResponseEntity register(@RequestBody User1DTO user1DTO){
+    public ResponseEntity register(@RequestBody @Valid User1DTO user1DTO){
         log.info(user1DTO);
         User1 savedUser1 = user1Service.insertUser1(user1DTO);
 
@@ -45,11 +49,13 @@ public class User1Controller {
                 .body(savedUser1);
     }
 
+    @ResponseBody
     @PutMapping("/user1")
-    public ResponseEntity modify(@RequestBody User1DTO user1DTO){
+    public ResponseEntity modify(@RequestBody @Valid User1DTO user1DTO){
         log.info(user1DTO);
         User1 modifiedUser1 = user1Service.updateUser1(user1DTO);
 
+        // ResponseEntity로 반환할 경우 @ResponseBody 생략
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED) // 202
                 .body(modifiedUser1);
@@ -65,7 +71,7 @@ public class User1Controller {
                     .body("success");
         }catch (EntityNotFoundException e){
             return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND) // 200
+                    .status(HttpStatus.NOT_FOUND) // 404
                     .body(e.getMessage());
         }
     }
