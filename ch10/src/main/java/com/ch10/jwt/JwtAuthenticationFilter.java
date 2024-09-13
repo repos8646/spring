@@ -27,10 +27,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         // 요청주소에서 마지막 문자열 추출
-        String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
-        String path = uri.substring(i);
-        log.info("here1 - " + path);
+        //String uri = request.getRequestURI();
+        //int i = uri.lastIndexOf("/");
+        //String path = uri.substring(i);
+        //log.info("here1 - " + path);
 
         // 토큰 추출
         String header = request.getHeader(AUTH_HEADER);
@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = null;
         if(header != null && header.startsWith(TOKEN_PREFIX)) {
-            token = header.substring(TOKEN_PREFIX.length());
+            token = header.substring(TOKEN_PREFIX.length()).trim();
         }
         log.info("here3 - " + token);
 

@@ -33,6 +33,7 @@ public class User {
                 .name(name)
                 .birth(birth)
                 .role(role)
+                .rdate(rdate)
                 .build();
     }
 
